@@ -8,12 +8,12 @@ cabal-version: 1.12
 
 name:           hs-empty-project-plain
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/hs-empty-project-plain#readme>
+description:    Please see the README on GitHub at <https://github.com/MikolajPrzygoda/hs-empty-project-plain#readme>
 homepage:       https://github.com/githubuser/hs-empty-project-plain#readme
 bug-reports:    https://github.com/githubuser/hs-empty-project-plain/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2019 Author name here
+author:         Mikolaj Przygoda
+maintainer:     przygoda.mikolaj@gmail.com
+copyright:      2019 Mikolaj Przygoda
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -27,7 +27,7 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Student, Tree, Lib
   other-modules:
       Paths_hs_empty_project_plain
   hs-source-dirs:
