@@ -27,28 +27,28 @@ listToProcess = [
     Student "Damian" "Dab"  22,
     Student "Eustachy" "Elo" 20]
 
--- 1.1
+-- 1.1 - Utworzyć listę zawierającą pełne imiona i nazwiska studentów 
+--       w postaci łańcuchów znaków.
+
 fullNames :: [Student] -> [String]
 fullNames [] = []
 --fullNames (x:xs) = fullName x : fullNames xs
 fullNames list = map fullName list
 
--- 1.2
-type OrderedStudents = [(Int, Student)]
+-- 1.2 - Utworzyć listę zawierającą pary w postaci krotek: 
+--       numer porządkowy, student.
 type OrderedStudent = (Int, Student)
-orderedListOperation :: OrderedStudents -> Student -> OrderedStudents
+orderedListOperation :: [OrderedStudent] -> Student -> [OrderedStudent]
 orderedListOperation [] student = [(1, student)]
 orderedListOperation accList student = accList ++ [(lastNum + 1, student)]
     where
     (lastNum, _) = last accList
 
-orderedList :: [Student] -> OrderedStudents
+orderedList :: [Student] -> [OrderedStudent]
 orderedList list = foldl orderedListOperation [] list
 
---1.3
---raport :: OrderedStudents -> String
---raport (x:xs) = 
-
+-- 1.3 - Przetworzyć listę z powyższego punktu na raport tesktowy w formacie 
+--       "1. student: Nazwisko I. wiek: Wiek"
 processRow :: OrderedStudent -> String
 processRow (lp, student) = 
     (show lp) ++ ". student: " ++ lastName student ++ " " ++ 
@@ -56,10 +56,61 @@ processRow (lp, student) =
     where
     initial:_ = firstName student
     
+genRaportString :: [OrderedStudent] -> String
+genRaportString list = foldl (++) "" (map processRow list)
+
+{- 1.4 - Wygenerować z tabelkę HTML.
+    Tabelka postaci:    
+    | Lp. | Student     | Wiek |
+    | 1.  | Nazwisko I. | 20   |
+-}
+processRowHTML :: OrderedStudent -> String
+processRowHTML (poz, student) = 
+    "<tr><td>" ++ show poz ++ ".</td><td>" ++ lastName student ++ " " ++
+    [inicial] ++ ".</td><td>" ++ show (age student) ++ "</td></tr>"
+    where
+    (inicial:_) = firstName student
+
+genRaportHTML :: [OrderedStudent] -> String
+genRaportHTML list = 
+    "<table>" ++ (foldl (++) "" (map processRowHTML list)) ++ "</table>"
     
-    
-    
-    
-    
-    
+-- 1.5 - Wygenerować listę zmian w postaci typu wydarzenia, 
+--       StudentsFirstNameChangeEvent oldName newName, przez utworzenie
+--       zmodyfikowanej listy studentów, a następnie porównanie. (???)
+{-
+data StudentChangeEvent = 
+    StudentsFirstNameChangeEvent {
+        oldName::String,
+        newName::String 
+    } | StudentsLastNameChangeEvent {
+        oldName::String,
+        newName::String
+    }
+
+isFirstNameChange :: StudentsChangeEvent -> Bool
+isFirstNameChange (StudentsFirstNameChange _ _) = True
+isFirstNameChange _ = False
+
+isLastNameChange :: StudentsChangeEvent -> Bool
+isLastNameChange (StudentsLastNameChange _ _) = True
+isLastNameChange _ = False
+
+ 
+applyEvent :: [Student] -> StudentChangeEvent -> [Student]
+applyEvent list event
+    | isFirstNameChange event = changeFirstName list event
+    | isLastNameChange event = changeLastName list event
+-}
+
+  
+
+
+
+
+
+
+
+
+
 
