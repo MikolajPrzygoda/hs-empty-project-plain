@@ -16,7 +16,6 @@ setAge student newAge = Student (firstName student) (lastName student) newAge
 
 initials::Student->String
 initials (Student (ii:_) (il:_) _) = [ii] ++ ". " ++ [il] ++ "."
-initials s 
 
 -- Lab 3 = Laboratorium: Przetwarzanie danych, funkcje wyższego rzędu
 

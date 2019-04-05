@@ -27,7 +27,7 @@ source-repository head
 
 library
   exposed-modules:
-      Student, Tree, Lib, MyLib
+      HeapTest, Student, Tree, Lib, MyLib
   other-modules:
       Paths_hs_empty_project_plain
   hs-source-dirs:
