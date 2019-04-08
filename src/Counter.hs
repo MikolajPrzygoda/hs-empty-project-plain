@@ -35,9 +35,8 @@ mapWords :: [String] -> WordMap
 mapWords listOfWords = foldl _mapper Map.empty listOfWords
 
 _mapper :: WordMap -> String -> WordMap
-_mapper map string
-    | Map.member string map = Map.insert string (map Map.! string + 1) map 
-    | otherwise = Map.insert string 1 map
+_mapper map string = 
+    Map.insert string (Maybe.fromMaybe 0 (Map.lookup string map) + 1) map 
 
 
 -- Add tuples from map into MinHeap
@@ -68,7 +67,9 @@ to3Mers (x1:x2:x3:xs) = list ++ [buffer]
     (buffer, list) = foldl _extractor (x1:x2:x3:[], []) xs
 
 _extractor :: (String, [String]) -> Char -> (String, [String])
-_extractor (buffer, list) c = (drop 1 buffer ++ [c], list ++ [buffer])
+_extractor (buffer, list) c
+    | c == '\n' = (buffer, list) -- ignore new line characters
+    | otherwise = (drop 1 buffer ++ [c], list ++ [buffer])
 
 
 count3Mers :: String -> Result
