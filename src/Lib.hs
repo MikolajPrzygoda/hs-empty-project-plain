@@ -1,8 +1,9 @@
-module Lib
-    ( someFunc
-    ) where
+module Lib where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+import Data.Maybe as Maybe
+
+f :: Maybe Int -> Int
+f Nothing = 0
+f (Just x) = x
 
 

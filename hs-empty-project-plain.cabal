@@ -27,7 +27,7 @@ source-repository head
 
 library
   exposed-modules:
-      Main, Student, Tree, Lib, MyLib
+      Main, Student, Tree, Lib, Counter, Alter
   other-modules:
       Paths_hs_empty_project_plain
   hs-source-dirs:
